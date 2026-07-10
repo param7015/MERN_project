@@ -6,7 +6,7 @@ export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
     const url = "https://mern-project-backend-tcyh.onrender.com"
-    const admin_url = "https://mern-project-admin-y0zm.onrender.com/"
+    const admin_url = "https://mern-project-admin-y0zm.onrender.com"
 
     const [cartitems, setcartitems] = useState({})
     const [token, settoken] = useState("")
