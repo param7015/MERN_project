@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_KEY)
 
 
 const placeorder = async (req, res) => {
-    const frontend_url = "http://localhost:5174";
+    const frontend_url = "https://mern-project-frontend-1rh6.onrender.com";
 
     try { // midleware attached userId will come from authMiddle
 
