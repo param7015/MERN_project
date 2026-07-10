@@ -320,8 +320,12 @@
     color: #ff2f00;
     margin-top: 5px;
 }
-.loading{
+.loading-container p{
     margin: 15px 0 5px 0;
     text-align: center;
-    color: #2f84ff;
+    color: #0361e5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

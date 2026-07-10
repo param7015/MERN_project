@@ -49,7 +49,7 @@ const Cart = () => {
         orderitems.push(iteminfo);
       }
     })
-    
+
     let orderdata = {
       address: formData,
       items: orderitems,
@@ -154,11 +154,11 @@ const Cart = () => {
                   </div>
                   <textarea placeholder='Detailed Address' name='address' value={formData.address} onChange={handleChange} className='address-textarea' />
                 </div>
-                 {/* <button onClick={() => navigate('/success')} className='checkout-btn'>PROCEED TO CHECKOUT</button> */}
-                
 
-                {loading ? <p className='loading'>Please wait...</p> : null}
-                <p className='userdetails' >{err}</p>
+                <div className="loading-container">
+                  {loading ? <p >Please wait...</p> : null}
+                  <p className='userdetails' >{err}</p>
+                </div>
                 <button type='submit' className='checkout-btn' >PROCEED TO CHECKOUT</button>
               </form>
 
