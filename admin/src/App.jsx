@@ -12,7 +12,7 @@ import Login from './components/Admin_login/Login'
 
 const App = () => {
 
-  const url = "http://localhost:5000";
+  const url = "https://mern-project-backend-tcyh.onrender.com";
   const [showlogin, setshowlogin] = useState(false)
   const [isAuthenticated, setisAuthenticated] = useState(false)
 
