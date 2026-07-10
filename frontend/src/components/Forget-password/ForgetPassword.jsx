@@ -20,8 +20,10 @@ const ForgetPassword = ({ setcurrstate, setshowlogin }) => {
         try {
             setloading(true)
             const response = await axios.post(url + "/api/user/forgot-password", { email });
-            setloading(false)
-            setOtpSent(true);
+            if(response.data.success){
+                setloading(false)
+                setOtpSent(true);
+            }
             
         } catch (error) {
             console.log(error);
