@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
-    const url = "http://localhost:5000"
+    const url = "https://mern-project-backend-tcyh.onrender.com"
     const admin_url = "http://localhost:5173"
 
     const [cartitems, setcartitems] = useState({})
