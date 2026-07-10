@@ -1,0 +1,35 @@
+.app-download{
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    font-size: max(3vw, 20px);
+    text-align: center;
+    font-weight: 500;
+    width: 800px;
+    color: var(--text-primary);
+}
+
+.store-icons img{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.store-icons{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.store-icons img:hover{
+    transform: scale(1.1);
+}
+
+#app-download {
+    scroll-margin-top: 200px;
+}

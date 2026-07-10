@@ -1,0 +1,45 @@
+.notfound{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15%;
+}
+.notfound h1{
+    color: rgb(255, 46, 46);
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+.notfound button{
+    margin-top: 30px;
+    padding: 15px 50px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: black;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer; 
+    transition: 0.5s;
+    border: none;
+    box-shadow: 2px 2px 2px black;
+}
+.notfound button:hover{
+    transform:scale(1.2);
+    /* border-radius: 120px; */
+    background-color: rgb(255, 60, 25);
+}
+/* .color{
+    color: aqua;
+} */
+/* .nocolor{
+    color: black;
+} */
+.starrating{
+    height: 10vh;
+    border: 1px solid black;
+}
+.starrating span{
+    cursor: pointer;
+    /* height: 10vh; */
+}

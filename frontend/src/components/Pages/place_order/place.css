@@ -1,0 +1,35 @@
+.place-order{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 50px;
+    margin-top: 50px;
+    padding: 70px;
+}
+.place-order-left{
+    width: 100%;
+    max-width: max(30%, 400px);
+}
+.place-order-left p{
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    color: var(--text-primary);
+}
+.place-order input{
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border-radius: 4px;
+    outline-color: tomato;
+}
+.place-order-left .multi-fields{
+    display: flex;
+    gap: 10px;
+}
+.place-order-right{
+    width: 500px;
+}

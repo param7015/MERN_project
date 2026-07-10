@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* ================================================
+   OVERLAY
+   ================================================ */
+.login-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: overlayIn 0.3s ease forwards;
+}
+
+@keyframes overlayIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ================================================
+   CARD — Pure Black, Minimal
+   ================================================ */
+.login-popup-card {
+    position: relative;
+    width: 480px;
+    background: #0d0d0d;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    font-family: 'Outfit', sans-serif;
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(255, 255, 255, 0.06);
+    animation: cardIn 0.45s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================================
+   LEFT — Hidden (image removed from view)
+   ================================================ */
+.login-popup-left {
+    display: none;
+}
+
+/* ================================================
+   RIGHT — Full Width Form Panel
+   ================================================ */
+.login-popup-right {
+    flex: 1;
+    width: 100%;
+    padding: 56px 48px 52px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+/* ================================================
+   HEADER SECTION
+   ================================================ */
+
+
+
+/* "Phone Login" / heading */
+.login-popup-right h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+
+/* Subtext below heading */
+.login-popup-right h2::after {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+
+/* Shared heading class support */
+.login-right-header {
+    margin-bottom: 0;
+}
+
+.login-right-header .heading {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+}
+
+/* ================================================
+   INPUTS SECTION
+   ================================================ */
+.login-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 3px;
+}
+
+/* Field label above each input */
+.login-inputs input {
+    width: 100%;
+    padding: 16px 16px;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background: #1a1a1a;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-family: 'Outfit', sans-serif;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.25s ease;
+    margin-bottom: 20px;
+}
+
+.login-inputs input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+}
+
+.login-inputs input:focus {
+    border-color: rgba(232, 73, 26, 0.7);
+    background: #1f1f1f;
+    box-shadow: 0 0 0 3px rgba(232, 73, 26, 0.1);
+}
+
+/* Fake label via sibling approach — using input wrapper labels via ::before on parent */
+.login-inputs input:first-child {
+    margin-top: 0;
+}
+
+/* .input-group support */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #1a1a1a;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-family: 'Outfit', sans-serif;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.25s ease;
+}
+
+.input-group input:focus {
+    border-color: rgba(232, 73, 26, 0.7);
+    background: #1f1f1f;
+    box-shadow: 0 0 0 3px rgba(232, 73, 26, 0.1);
+}
+
+/* ================================================
+   BUTTONS
+   ================================================ */
+.login-popup-right button {
+    width: 100%;
+    padding: 18px;
+    border-radius: 2px;
+    border: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+/* Primary — Send OTP (matches orange CTA) */
+.login-popup-right button:first-of-type {
+    background: #e8491a;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(232, 73, 26, 0.35);
+}
+
+
+.login-popup-right button:last-of-type:hover:not(:disabled) {
+    border-color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.login-popup-right button:active:not(:disabled) {
+    transform: translateY(0);
+    filter: brightness(0.95);
+}
+
+.login-popup-right button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.login-right-header p {
+    color: #6c6c6c;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.login-right-header h4 {
+    color: #e8491a;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* .submit-btn support */
+.submit-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 18px;
+    border-radius: 2px;
+    border: none;
+    background: #100041;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 20px rgba(232, 73, 26, 0.35);
+}
+
+.submit-btn:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(232, 73, 26, 0.5);
+}
+
+.submit-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ================================================
+   DIVIDER + FOOTER
+   ================================================ */
+
+/* Horizontal divider */
+.login-popup-right .login-toggle::before {
+    content: '';
+    display: block;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.07);
+    margin-bottom: 22px;
+}
+
+/* "New to ...? Create an Account" row */
+.login-toggle {
+    margin-top: 28px;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.login-toggle span {
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+}
+
+.login-toggle span:hover {
+    color: #e8491a;
+}
+
+/* ================================================
+   ERROR
+   ================================================ */
+.error-msg {
+    color: #e8491a;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin: 0 0 12px;
+    min-height: 16px;
+    letter-spacing: 0.02em;
+}
+
+/* ================================================
+   CONDITIONS
+   ================================================ */
+.login-condition {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.3);
+    margin-top: 16px;
+    line-height: 1.4;
+}
+
+.login-condition span {
+    color: #e8491a;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-condition .check {
+    accent-color: #e8491a;
+    margin-top: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Login form wrapper */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 0;
+}
+
+.label {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.cross{
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+    margin-top: 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+}
+.cross:hover{
+    color: #e8491a;
+}
+
+.forgot-password-link {
+    font-size: 0.8rem;
+    color: #1900ff;
+    text-align: right;
+    cursor: pointer;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.forgot-password-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}

@@ -1,0 +1,327 @@
+.cart-container {
+    padding: 50px 70px;
+    min-height: 86vh;
+    display: flex;
+    justify-content: center;
+}
+
+.cart-content {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    gap: 40px;
+    width: 100%;
+    max-width: 1300px;
+}
+
+/* .section-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+} */
+
+.cart-left p, .order-summary-card p{
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #ff4c24;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+/* --- Left Column: Items --- */
+.cart-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-item-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.cart-item-card:hover {
+    transform: translateY(-5px);
+    background: var(--bg-card);
+    box-shadow: 0 8px 25px rgba(255, 76, 36, 0.1);
+}
+
+.item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item-info .item-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.item-info .item-category {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 4px 0 0 0;
+}
+
+.item-price-qty {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item-price {
+    font-weight: 900;
+    color: tomato;
+    font-size: 18px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--bg-card);
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+.qty-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.qty-btn:hover {
+    color: tomato;
+    
+}
+
+.qty-count {
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+}
+
+.item-total {
+    font-weight: 700;
+    color: orangered;
+    min-width: 80px;
+    text-align: right;
+    font-size: 20px;
+}
+
+/* --- Right Column: Summary --- */
+.cart-right {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.order-summary-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 100px;
+}
+
+.summary-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+.summary-row.total {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 5px;
+}
+
+.summary-divider {
+    border: none;
+    height: 1px;
+    background: var(--border-color);
+    margin: 5px 0;
+}
+
+/* --- Delivery Info --- */
+.delivery-info-section {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.subsection-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-row input, .address-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.form-group input:focus, .form-row input:focus, .address-textarea:focus {
+    border-color: tomato;
+    box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+}
+
+.address-textarea {
+    height: 80px;
+    resize: none;
+}
+
+.checkout-btn {
+    width: 100%;
+    margin-top: 30px;
+    background-color: tomato;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+}
+
+.checkout-btn:hover {
+    background-color: #e03a16;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4);
+}
+
+/* --- Empty Cart --- */
+.cart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.cart-empty button{
+    background-color: tomato;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+}
+
+.cart-empty button:hover {
+    background-color: #e03a16;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4);
+}
+
+.empty-cart-img {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.cart-empty h1 {
+    font-size: 32px;
+    color: var(--text-primary);
+}
+
+.cart-empty p {
+    color: var(--text-secondary);
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1000px) {
+    .cart-content {
+        grid-template-columns: 1fr;
+    }
+    .cart-container {
+        padding: 30px 20px;
+    }
+    .order-summary-card {
+        position: static;
+    }
+}
+
+.Toastify__progress-bar {
+  background: #000000; /* pink color */
+  height: 6px;          /* thicker bar */
+  border-radius: 3px;   /* rounded ends */
+}
+.theme{
+    background-color: blue;
+}
+/* Optional: remove the progress bar entirely */
+.userdetails{
+    font-size: 15px;
+    text-align: center;
+    color: #ff2f00;
+    margin-top: 5px;
+}
+.loading{
+    margin: 15px 0 5px 0;
+    text-align: center;
+    color: #2f84ff;
+}

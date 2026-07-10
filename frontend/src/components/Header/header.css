@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Outfit:wght@300;400;500;600&display=swap');
+
+/* ================================================
+   HEADER — Cinematic Restaurant Hero
+   ================================================ */
+.header {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center; /* Centered content like the image */
+    justify-content: flex-start;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background: #000;
+}
+
+/* ================================================
+   BACKGROUND IMAGE
+   ================================================ */
+.headerimg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* filter: brightness(0.45) saturate(1.1); Dark moody look */
+    transition: transform 10s ease;
+    z-index: 0;
+}
+
+.header:hover .headerimg {
+    transform: scale(1.05);
+}
+
+/* ================================================
+   GRADIENT OVERLAYS
+   ================================================ */
+.header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.7) 0%,
+        rgba(0,0,0,0.3) 50%,
+        rgba(0,0,0,0.8) 100%
+    );
+    z-index: 1;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.8) 0%,
+        rgba(0,0,0,0.2) 60%,
+        transparent 100%
+    );
+    z-index: 1;
+}
+
+/* ================================================
+   CONTENT BOX
+   ================================================ */
+.header-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 5vw 0 10vw;
+    max-width: 850px;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Orange Label */
+.header-label {
+    color: #FF4C29; /* Vibrant Orange from image */
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    margin-bottom: 25px;
+    display: block;
+    text-transform: uppercase;
+}
+
+/* Main Heading */
+.header-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 65px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+    margin: 0 0 25px 0;
+    letter-spacing: -0.02em;
+}
+
+/* Paragraph */
+.para {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    margin-bottom: 45px;
+    max-width: 550px;
+}
+
+/* ================================================
+   BUTTONS
+   ================================================ */
+.header-btns {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header_btn {
+    padding: 18px 45px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    border-radius: 4px;
+}
+
+/* Solid Orange Button */
+.header_btn.primary {
+    background: #FF4C29;
+    color: #fff;
+}
+
+.header_btn.primary:hover {
+    background: #e63e1d;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 76, 41, 0.4);
+}
+
+/* Outlined Button */
+.header_btn.secondary {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: #fff;
+}
+
+.header_btn.secondary:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: #fff;
+    transform: translateY(-3px);
+}
+
+/* ================================================
+   ANIMATIONS
+   ================================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+@media (max-width: 768px) {
+    .header-content {
+        padding: 0 20px;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .header-content h1 {
+        font-size: 3rem;
+    }
+    
+    .header-btns {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .header_btn {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    .para {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
