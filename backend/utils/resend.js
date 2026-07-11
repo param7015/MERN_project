@@ -1,0 +1,21 @@
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const sendMail = async (to, subject, text) => {
+    const { data, error } = await resend.emails.send({
+        from: "tomato <onboarding@resend.dev>",
+        to,
+        subject,
+        text,
+    });
+
+    if (error) {
+        console.error("Resend Error:", error);
+        throw new Error(error.message);
+    }
+
+    return data;
+};
+
+export default sendMail;

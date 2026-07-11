@@ -2,7 +2,7 @@ import userModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
-import sendMail from "../utils/nodemailer.js";
+import sendMail from "../utils/resend.js";
 import { model } from "mongoose";
 
 
