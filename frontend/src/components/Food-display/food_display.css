@@ -13,6 +13,7 @@
     row-gap: 50px;
 }
 
+
 .no {
     display: flex;
     flex-direction: column;
@@ -66,4 +67,4 @@
         padding-left: 20px;
         padding-right: 20px;
     }
-}
+}

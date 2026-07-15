@@ -10,7 +10,6 @@ const SkeletonCard = () => {
             <div className="food-item-info">
                 <div className="skeleton skeleton-name"></div>
 
-
             </div>
 
             <div className="food-info">
