@@ -18,7 +18,7 @@ const Fooditem = ({ id, name, price, image, description }) => {
 
       <div className="food-item-info">
         <p className='food-name'>{name}</p>
-        {/* <img src={assets.rating_starts} alt="" /> */}
+        
         <div className="star-rating">
           {
             arr.map((Item, index) => {

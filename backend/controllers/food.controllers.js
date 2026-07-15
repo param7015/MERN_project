@@ -48,6 +48,28 @@ const deleteFood = async (req, res) => {
 
 
 
+const limitFoodList = async (req, res) => {
+
+    try {
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 10;
+
+        const skip = (page - 1) * limit;
+
+        const foods = await foodModel.find({}).skip(skip).limit(limit);
+        res.json({ success: true, data: foods });
+        
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: "Error" })
+    }
+}
+
+
+
+
+
+
 // AI chatController For ai assistant
 
 const chatController = async (req, res) => {
@@ -139,4 +161,4 @@ User: ${message}
     }
 };
 
-export { addFood, listFood, deleteFood, chatController }
+export { addFood, listFood, deleteFood, limitFoodList, chatController };

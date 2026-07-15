@@ -1,33 +1,65 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './food_display.css'
 import { StoreContext } from '../Storecontext/Storecontext'
 import Fooditem from '../Fooditem/Fooditem'
+import axios from 'axios'
+import SkeletonCard from '../SkeletonCard/SkeletonCard'
+
 const FoodDisplay = ({ category }) => {
 
-  const { food_list, input } = useContext(StoreContext)
+  // const { food_list, input, url } = useContext(StoreContext)
+  const { url } = useContext(StoreContext)
+  const [page, setPage] = useState(1);
+  const [loading, setloading] = useState(false);
+  const [fetchfoodlist, setfetchfoodlist] = useState([])
 
-  const filteredFood = food_list.filter((item) => {
-    return item.name.toLowerCase().includes(input)
-  })
+  // const filteredFood = food_list.filter((item) => {
+  //   return item.name.toLowerCase().includes(input)
+  // })
+
+
+  const fetchProducts = async () => {
+    setloading(true);
+    const response = await axios.get(`${url}/api/food/limitFoodList?page=${page}&limit=10`);
+    
+    if(response.data.success) {
+      setfetchfoodlist(prev => [...prev, ...response.data.data]);
+    }
+    setloading(false);
+  }
+
+
+  useEffect(() => {
+    fetchProducts()
+  }, [page])
+
+
   return (
     <div className='food-display' id='food-display'>
       <h1>Top Dishes Near YOU</h1>
       <div className="food-display-list">
-        {filteredFood.length > 0 ? (
-          filteredFood.map((item, index) => {
+        
+        {fetchfoodlist.map((item, index) => {
             if (category === "All" || category === item.category) {
               return <Fooditem key={index} id={item._id} name={item.name} price={item.price} image={item.image} description={item.description} category={item.category} />
             }
           })
-        ) : (
-          <div className="no">
-            <img src="https://media.istockphoto.com/id/1412920498/vector/no-eating-or-drinking-sign-food-and-beverage-rules-vector.jpg?s=612x612&w=0&k=20&c=Hv_HjvkwxvmzIlkXgtVAcd6zHjJdCV1NvLLM2dIdXkQ=" className='foodie' alt="" srcset="" />
-            <h1 className='food-not'>Uh oh! Looks Like Item Is not in our menu</h1>
-          </div>
+        }
+        
+        {loading && 
+        (
+          [...Array(5)].map((_, index) => (
+            <SkeletonCard key={index} />
+          ))
         )}
 
+
       </div>
-      
+      <div className="load-more-container">
+          
+          <button className='load-more' onClick={() => setPage(prev => prev + 1)}>Load More +</button>
+        </div>
+
     </div>
   )
 }
