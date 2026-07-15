@@ -18,6 +18,7 @@ const FoodDisplay = ({ category }) => {
   // })
 
 
+  
   const fetchProducts = async () => {
     setloading(true);
     const response = await axios.get(`${url}/api/food/limitFoodList?page=${page}&limit=10`);
@@ -62,7 +63,7 @@ const FoodDisplay = ({ category }) => {
         </div>
 
     </div>
-    
+
   )
 }
 

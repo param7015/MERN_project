@@ -22,6 +22,7 @@ const SkeletonCard = () => {
             </div>
         </div>
 
+
     )
 }
 
