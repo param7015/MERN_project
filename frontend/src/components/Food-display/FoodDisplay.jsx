@@ -33,6 +33,7 @@ const FoodDisplay = ({ category }) => {
     fetchProducts()
   }, [page])
 
+  
 
   return (
     <div className='food-display' id='food-display'>

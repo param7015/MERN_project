@@ -1,6 +1,7 @@
 import React from 'react'
 import './skeleton.css'
 
+
 const SkeletonCard = () => {
     return (
         <div className="food-item skeleton-card">
