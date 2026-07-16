@@ -48,17 +48,16 @@ const Navbar = ({ setshowlogin }) => {
 
             <div className="navbar-right">
                 <div className="navbar-search-container">
-                    <input
+                    {/* <input
                         type="text"
                         placeholder='search food items...'
                         className='search-bar'
                         onChange={(e) => setinput(e.target.value)}
                         value={input}
-                    />
-                    <a href='#food-display'>
-                        <img src={assets.search_icon} alt="" className='search-icon' />
-
-                    </a>
+                    /> */}
+                    <p>
+                        <img src={assets.search_icon} alt="" className='search-icon' onClick={() => navigate('/search')} />
+                    </p>
                 </div>
                 <div className="navbar-cart-container">
                     <Link to='/cart'><img src={assets.basket_icon} alt="" /></Link>

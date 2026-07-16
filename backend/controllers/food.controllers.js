@@ -67,6 +67,34 @@ const limitFoodList = async (req, res) => {
 
 
 
+const searchFood = async (req, res) => {
+
+    const {query} = req.query;
+    try {
+        
+        if(!query){
+            return res.status(400).json({success:false,message:"Please enter a item name to search"})
+        }
+
+        const searchQuery = query.trim().toLowerCase().replace(/\s+/g, " ")
+
+        const foods = await foodModel.find({
+            name: { $regex: searchQuery, $options: "i" }
+        })
+
+        if(foods.length === 0){
+            return res.status(404).json({success:false,message:"Uh oh! Looks like this item is not available. "})
+        }
+
+        res.status(200).json({ success: true, data: foods })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ success: false, message: error })
+    }
+}
+
+
 
 
 // AI chatController For ai assistant
@@ -160,4 +188,4 @@ User: ${message}
     }
 };
 
-export { addFood, listFood, deleteFood, limitFoodList, chatController };
+export { addFood, listFood, deleteFood, limitFoodList, searchFood, chatController };

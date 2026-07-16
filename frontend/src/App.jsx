@@ -14,6 +14,7 @@ import Myorders from './components/My_orders/Myorders'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Verify from './components/Verify/Verify'
+import SearchPage from './components/SearchPage/SearchPage'
 
 
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route path='/' element={<Home />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/order' element={<Place />} />
+            <Route path='/search' element={<SearchPage />} />
             <Route path='/invoice' element={<Invoice />} />
             <Route path='/success' element={<PaymentSuccess />} />
             <Route path='/cancel' element={<PaymentFailed />} />

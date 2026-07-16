@@ -1,0 +1,100 @@
+.skeleton-search {
+    background: linear-gradient(
+        90deg,
+        #1d1d1d 25%,
+        #303030 50%,
+        #1d1d1d 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 6px;
+}
+
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+
+/* Card same as your real card */
+.skeleton-search-card {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 220px;
+    background: #111111;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 18px;
+}
+
+
+/* Big left image */
+.skeleton-search-image {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    border-radius: 0;
+}
+
+
+/* Right side */
+.skeleton-search-card .search-item-details {
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/* Food name */
+.skeleton-search-title {
+    width: 260px;
+    height: 32px;
+    margin-bottom: 22px;
+}
+
+
+/* Description */
+.skeleton-search-description {
+    width: 90%;
+    height: 14px;
+    margin-bottom: 12px;
+}
+
+
+.skeleton-search-description.small {
+    width: 60%;
+}
+
+
+/* Bottom section */
+.skeleton-search-card .search-item-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.skeleton-search-price {
+    width: 80px;
+    height: 30px;
+}
+
+
+.skeleton-search-button {
+    width: 132px;
+    height: 42px;
+}
+
+.skeleton-search-list{
+    display: flex;
+    flex-direction: column;
+    gap: 200px;
+}
