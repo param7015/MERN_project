@@ -55,12 +55,11 @@ const FoodDisplay = ({ category }) => {
           ))
         )}
 
-
       </div>
+
       <div className="load-more-container">
-          
           <button className='load-more' onClick={() => setPage(prev => prev + 1)}>Load More +</button>
-        </div>
+      </div>
 
     </div>
 

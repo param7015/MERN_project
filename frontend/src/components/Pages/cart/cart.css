@@ -305,6 +305,71 @@
     }
 }
 
+/* Mobile layout: retain the same card design while preventing horizontal overflow. */
+@media (max-width: 600px) {
+    .cart-container {
+        padding: 24px 14px;
+    }
+
+    .cart-content {
+        gap: 30px;
+    }
+
+    .cart-items-list {
+        gap: 16px;
+    }
+
+    .cart-item-card {
+        gap: 14px;
+        padding: 14px;
+    }
+
+    .item-details {
+        min-width: 0;
+    }
+
+    .item-info .item-name {
+        overflow-wrap: anywhere;
+    }
+
+    .item-price-qty {
+        flex-wrap: wrap;
+        gap: 10px 14px;
+    }
+
+    .item-total {
+        margin-left: auto;
+    }
+
+    .order-summary-card {
+        padding: 24px 20px;
+    }
+
+    .form-group input, .form-row input, .address-textarea {
+        box-sizing: border-box;
+    }
+
+    .empty-cart-img {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 380px) {
+    .cart-item-card {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .item-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .order-summary-card {
+        padding: 20px 15px;
+    }
+}
+
 .Toastify__progress-bar {
   background: #000000; /* pink color */
   height: 6px;          /* thicker bar */

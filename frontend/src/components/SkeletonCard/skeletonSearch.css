@@ -98,3 +98,32 @@
     flex-direction: column;
     gap: 200px;
 }
+
+/* Use the same mobile card structure as the real search results. */
+@media (max-width: 720px) {
+    .skeleton-search-card {
+        grid-template-columns: 1fr;
+    }
+
+    .skeleton-search-image {
+        height: 230px;
+        min-height: 230px;
+    }
+
+    .skeleton-search-card .search-item-details {
+        padding: 20px;
+    }
+
+    .skeleton-search-card .search-item-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .skeleton-search-title {
+        width: min(260px, 100%);
+    }
+
+    .skeleton-search-button {
+        width: 100%;
+    }
+}
