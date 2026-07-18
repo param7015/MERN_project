@@ -100,17 +100,12 @@ const SearchPage = () => {
 
       </div>
 
-      {/* {loading && (
+      {loading && (
         [...Array(5)].map((_, index) => (
           <SkeletonSearch key={index} />
         ))
-      )} */}
+      )}
 
-      {
-        [...Array(5)].map((_, index) => (
-          <SkeletonSearch key={index} />
-        ))
-      }
     </div>
   )
 }
