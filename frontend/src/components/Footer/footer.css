@@ -49,3 +49,73 @@
     
 }
 
+/* =============================================
+   RESPONSIVE — Footer
+   ============================================= */
+@media (max-width: 900px) {
+    .footer {
+        padding: 50px 30px;
+        gap: 25px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    /* Left column spans full width on tablet */
+    .footer-content-left {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer {
+        padding: 40px 20px;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-content-left {
+        grid-column: unset;
+        align-items: center;
+    }
+
+    .footer-content-left p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+    }
+
+    .social-icons img {
+        margin-right: 12px;
+    }
+
+    .footer-content-center,
+    .footer-content-right {
+        align-items: center;
+    }
+
+    .footer-content-right li,
+    .footer-content-left {
+        align-items: center;
+        margin-left: 0;
+    }
+
+    .footers {
+        align-items: center;
+    }
+
+    .footerlogo {
+        width: 110px;
+    }
+}

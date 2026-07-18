@@ -1,5 +1,4 @@
 .explore_menu{
-    /* border: 1px solid black; */
     margin-top: 100px;
     display: flex;
     justify-content: center;
@@ -10,7 +9,6 @@
 }
 .explore-menu-list{
     display: flex;
-    /* justify-content: space-between; */
     gap: 30px;
 }
 .explore-menu-list-item{
@@ -42,4 +40,68 @@
 
 #explore-menu {
     scroll-margin-top: 120px;
+}
+
+/* =============================================
+   RESPONSIVE — Explore Menu
+   ============================================= */
+@media (max-width: 900px) {
+    .explore_menu {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 60px;
+    }
+
+    .explore_menu h1 {
+        font-size: clamp(1.4rem, 5vw, 2rem);
+    }
+
+    .explore-menu-text {
+        font-size: 14px;
+    }
+
+    /* Scroll horizontally so all categories remain accessible */
+    .explore-menu-list {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 18px;
+        padding-bottom: 8px;
+    }
+
+    .explore-menu-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .explore-menu-list-item {
+        flex-shrink: 0;
+    }
+
+    .explore-menu-list-item img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .item-name {
+        font-size: 13px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .explore_menu {
+        padding-left: 12px;
+        padding-right: 12px;
+        margin-top: 40px;
+        gap: 14px;
+    }
+
+    .explore-menu-list-item img {
+        width: 58px;
+        height: 58px;
+    }
+
+    .item-name {
+        font-size: 12px;
+    }
 }

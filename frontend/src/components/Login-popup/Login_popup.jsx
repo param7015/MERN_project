@@ -97,7 +97,7 @@ const Login_popup = ({ setshowlogin }) => {
                                     <div className="input-group">
                                         <input
                                             type="password"
-                                            placeholder='Create Password'
+                                            placeholder={currstate === "Login" ? "Password" : "Create Password"}
                                             required
                                             name='password'
                                             value={data.password}

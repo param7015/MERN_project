@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     position: sticky;
     top: 0px;
     z-index: 100;
@@ -36,12 +37,18 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgb(228, 228, 228);
+    background: rgb(230, 230, 230);
     padding: 2px 8px;
     border-radius: 50px;
     transition: all 0.3s ease;
     border: 1px solid transparent;
     margin-right: 80px;
+    cursor: pointer;
+}
+
+.navbar-search-container span{
+    color: black;
+    font-weight: 500;
 }
 
 .navbar-search-container:hover {
@@ -197,8 +204,92 @@
 }
 
 @media (max-width: 900px) {
+    .navbar {
+        padding: 5px 20px;
+        row-gap: 0;
+    }
+
+    /* Row 1: logo + right icons — stay on one line */
+    .navbar > a,
+    .navbar-right {
+        flex: 0 0 auto;
+    }
+
+    /* Row 2: nav menu stretches full width */
     .navbar-menu {
+        display: flex;
+        order: 3;                        /* push below logo & right */
+        width: 100%;
+        gap: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;           /* Firefox */
+        padding: 6px 0 8px;
+        border-top: 1px solid var(--border-color, #eaeaea);
+    }
+
+    .navbar-menu::-webkit-scrollbar {
+        display: none;                   /* Chrome / Safari */
+    }
+
+    .navbar-menu a {
+        white-space: nowrap;
+        flex-shrink: 0;
+        font-size: 14px;
+        padding: 6px 14px;
+    }
+
+    /* Remove underline animation on mobile (tight spacing) */
+    .navbar-menu a::after {
         display: none;
+    }
+
+    .navbar-menu a:hover {
+        background: rgba(255, 99, 71, 0.08);
+        border-radius: 20px;
+        transform: none;
+    }
+
+    .navbar-search-container {
+        margin-right: 0;
+    }
+
+    .navbar-right {
+        gap: 16px;
+    }
+
+    .profile-initial {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 5px 12px;
+    }
+
+    .navbar .logo {
+        width: 70px;
+    }
+
+    .navbar-right {
+        gap: 10px;
+    }
+
+    .navbar-profile button {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+
+    .search-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .navbar-menu a {
+        font-size: 13px;
+        padding: 6px 12px;
     }
 }
 
@@ -233,6 +324,7 @@
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -305,7 +397,7 @@
     transform: scale(1.1);
 }
 
-.profile{
+.profile {
     color: #84ffeb;
     padding: 3px 14px;
     border-radius: 50%;
@@ -331,7 +423,7 @@
     cursor: pointer;
 }
 
-.navbar-profile button{
+.navbar-profile button {
     padding: 10px 22px;
     font-size: 16px;
     font-weight: 600;
@@ -342,7 +434,7 @@
     transition: 0.2s ease-in-out;
 }
 
-.navbar-profile button:hover{
+.navbar-profile button:hover {
     background-color: rgb(59, 21, 15);
     color: white;
     cursor: pointer;

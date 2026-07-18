@@ -81,3 +81,86 @@
     font-weight: 500;
     color: rgb(27, 27, 183);
 }
+
+/* =============================================
+   RESPONSIVE — My Orders
+   ============================================= */
+@media (max-width: 900px) {
+    .my-orders {
+        padding: 40px 30px;
+    }
+
+    .order-row {
+        grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
+        gap: 16px;
+    }
+
+}
+
+@media (max-width: 650px) {
+    .my-orders {
+        padding: 30px 16px;
+    }
+
+    .my-orders h2 {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+    }
+
+    /* Collapse 6-column grid → vertical card */
+    .order-row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .order-row img {
+        width: 40px;
+    }
+
+    .order-row p {
+        margin: 0;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+
+    .order-status {
+        font-size: 1rem;
+    }
+
+    .my-orders-order button {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    .download-myorders {
+        margin-top: 6px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 10px;
+    }
+
+    .download-myorders button {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 6px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .my-orders {
+        padding: 20px 12px;
+    }
+
+    .my-orders-order {
+        padding: 12px;
+    }
+
+    .order-row img {
+        width: 34px;
+    }
+}
