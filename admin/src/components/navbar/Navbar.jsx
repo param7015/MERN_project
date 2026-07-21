@@ -43,7 +43,6 @@ const Navbar = ({ setisAuthenticated, isAuthenticated, url, setshowlogin }) => {
 
           setuser(retryResponse.data.user);
           setisAuthenticated(true);
-          settoken(retryResponse.data.token);
         }  
          else {
           console.log("i runn");

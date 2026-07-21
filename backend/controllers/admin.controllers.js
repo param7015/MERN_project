@@ -110,6 +110,7 @@ const adminRegister = async (req, res) => {
 const getProfile = async (req, res) => {
     try {
         const token = await req.cookies.accessToken
+        console.log(token)
         if (!token) {
             return res.status(401).json({ success: false, message: "token not found" })
         }
