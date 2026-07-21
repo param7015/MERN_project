@@ -7,15 +7,18 @@ const List = ({ url, isAuthenticated }) => {
 
 
   const [list, setlist] = useState([])
+  const [loading, setloading] = useState(true)
 
   const fetchList = async () => {
-    const response = await axios.get(`${url}/api/food/list`, {withCredentials: true})
+    setloading(true)
+    const response = await axios.get(`${url}/api/food/list`, { withCredentials: true })
     if (response.data.success) {
       setlist(response.data.data)
     }
     else {
       toast.error(response.data.message)
     }
+    setloading(false)
   }
 
   const removefood = async (id) => {
@@ -35,33 +38,39 @@ const List = ({ url, isAuthenticated }) => {
 
   return (
     <>
-      {isAuthenticated ? (
-        <div className='list add flex-col' >
-          <p>All Food List</p>
-          <div className="list-table">
-            <div className="list-table-format title">
-              <b>Image</b>
-              <b>Name</b>
-              <b>Category</b>
-              <b>Price</b>
-              <b>Actions</b>
-            </div>
-            {list.map((item, index) => {
-              return (
-                <div className="list-table-format" key={index}>
-                  <img src={`${url}/images/` + item.image} alt="" srcset="" />
-                  <p>{item.name}</p>
-                  <p>{item.category}</p>
-                  <p>${item.price}</p>
-                  <p onClick={() => { removefood(item._id) }} className='cursor'>X</p>
-                </div>
-              )
-            })}
-          </div>
+      {loading ? (
+        <div className="list-loader">
+          <div className="lds-facebook"><div></div><div></div><div></div></div>
+          <p>Fetching your items...</p>
         </div>
-      ) : (
-        <p className='not-sign-in'>Please Login To List Items !</p>
-      )}
+      ) :
+        isAuthenticated ? (
+          <div className='list add flex-col' >
+            <p>All Food List</p>
+            <div className="list-table">
+              <div className="list-table-format title">
+                <b>Image</b>
+                <b>Name</b>
+                <b>Category</b>
+                <b>Price</b>
+                <b>Actions</b>
+              </div>
+              {list.map((item, index) => {
+                return (
+                  <div className="list-table-format" key={index}>
+                    <img src={`${url}/images/` + item.image} alt="" srcset="" />
+                    <p>{item.name}</p>
+                    <p>{item.category}</p>
+                    <p>${item.price}</p>
+                    <p onClick={() => { removefood(item._id) }} className='cursor'>X</p>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        ) : (
+          <p className='not-sign-in'>Please Login To List Items !</p>
+        )}
     </>
   )
 }

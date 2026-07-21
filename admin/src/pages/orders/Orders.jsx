@@ -8,8 +8,10 @@ import { assets } from '../../assets/assets'
 
 const Orders = ({ url, isAuthenticated }) => {
   const [orders, setorders] = useState([])
+  const [loading, setloading] = useState(false)
 
   const fetchOrders = async () => {
+    setloading(true)
     const response = await axios.get(url + "/api/order/listorders", {withCredentials: true})
     if (response.data.success) {
       setorders(response.data.data)
@@ -17,6 +19,7 @@ const Orders = ({ url, isAuthenticated }) => {
     } else {
       toast.error(response.data.message)
     }
+    setloading(false)
   }
 
   const statusHandler = async (event, orderId) => {
@@ -33,7 +36,9 @@ const Orders = ({ url, isAuthenticated }) => {
 
   return (
     <>
-      {isAuthenticated ? (
+      {loading ? (
+        <div class="lds-facebook"><div></div><div></div><div></div></div>
+      ) : isAuthenticated ? (
         <div className='order-add'>
           <h1>Order Management</h1>
           <div className='order-list'>

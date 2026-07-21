@@ -13,12 +13,14 @@ const Navbar = ({ setisAuthenticated, isAuthenticated, url, setshowlogin }) => {
   const [sidebarprofile, setsidebarprofile] = useState(false)
 
   useEffect(() => {
-      getProfile()
+    getProfile()
   }, [])
   console.log("isAuthenticated", isAuthenticated)
 
   // getting the profile of the user to show profile and logout option
   const getProfile = async () => {
+
+    setloading(true)
     try {
       const response = await axios.get(
         url + "/api/admin/getprofile",
@@ -43,8 +45,8 @@ const Navbar = ({ setisAuthenticated, isAuthenticated, url, setshowlogin }) => {
 
           setuser(retryResponse.data.user);
           setisAuthenticated(true);
-        }  
-         else {
+        }
+        else {
           console.log("i runn");
           setuser(null);
           setisAuthenticated(false);
@@ -55,9 +57,12 @@ const Navbar = ({ setisAuthenticated, isAuthenticated, url, setshowlogin }) => {
         setisAuthenticated(false);
       }
     }
+    finally {
+      setloading(false)
+    }
   };
 
-// handling the logout of the user
+  // handling the logout of the user
   const handleLogout = async () => {
     setloading(true);
 
@@ -67,7 +72,7 @@ const Navbar = ({ setisAuthenticated, isAuthenticated, url, setshowlogin }) => {
         {},
         { withCredentials: true }
       );
-      
+
       if (response.data.success) {
         setsidebarprofile(false);
         setuser(null);
@@ -79,7 +84,7 @@ const Navbar = ({ setisAuthenticated, isAuthenticated, url, setshowlogin }) => {
       setisAuthenticated(false);
     } finally {
       setloading(false);
-      
+
     }
   };
 
@@ -87,16 +92,21 @@ const Navbar = ({ setisAuthenticated, isAuthenticated, url, setshowlogin }) => {
     <div>
       <div className="navbar">
         <img className='logo' src={assets.logo} alt="" />
-        {!isAuthenticated ? (
-          <div>
-            <p onClick={() => { setshowlogin(prev => !prev) }} className='sign-in-btn'>Sign In</p>
-          </div>
-        ) : (
-          <div className='profile-container'>
-            <p onClick={() => { setsidebarprofile(prev => !prev) }}>{user?.name?.charAt(0).toUpperCase()}</p>
 
-          </div>
-        )}
+        {loading ? (
+          <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        ) : (
+            !isAuthenticated ? (
+              <div>
+                <p onClick={() => { setshowlogin(prev => !prev) }} className='sign-in-btn'>Sign In</p>
+              </div>
+            ) : (
+              <div className='profile-container'>
+                <p onClick={() => { setsidebarprofile(prev => !prev) }}>{user?.name?.charAt(0).toUpperCase()}</p>
+              </div>
+            )
+          )}
+
         {sidebarprofile ? (
           <div className='sidebarprofile'>
             <div className='profile-top'>
