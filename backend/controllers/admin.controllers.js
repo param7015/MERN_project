@@ -42,7 +42,8 @@ const adminLogin = async (req, res) => {
         const { accessToken, refreshToken } = await generateAccessandRefreshToken(admin._id);
         const options = {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production" // this will give true or false
+            secure: process.env.NODE_ENV === "production", // this will give true or false
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
         }
 
         return res.cookie("accessToken", accessToken, options)
@@ -89,10 +90,6 @@ const adminRegister = async (req, res) => {
         })
 
 
-        const options = {
-            httpOnly: true,
-            secure: false // need to write it because using localhost & its HTTP server not HTTPS 
-        }
 
         return res.json({
             success: true,
@@ -142,7 +139,8 @@ const refreshAccessToken = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production" // this will give true or false // need to write it because using localhost & its HTTP server not HTTPS 
+            secure: process.env.NODE_ENV === "production", // this will give true or false // need to write it because using localhost & its HTTP server not HTTPS 
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
         }
         return res.cookie("accessToken", accessToken, options)
             .json({
@@ -176,7 +174,8 @@ const logout = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: false
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
         }
         return res.clearCookie("accessToken", options)
             .clearCookie("refreshToken", options)
