@@ -2,7 +2,6 @@ import adminModel from "../models/admin.models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator"
-import { foodModel } from "../models/food.models.js";
 
 
 const generateAccessandRefreshToken = async (adminId) => {
@@ -43,7 +42,7 @@ const adminLogin = async (req, res) => {
         const { accessToken, refreshToken } = await generateAccessandRefreshToken(admin._id);
         const options = {
             httpOnly: true,
-            secure: true
+            secure: process.env.NODE_ENV === "production" // this will give true or false
         }
 
         return res.cookie("accessToken", accessToken, options)
@@ -120,7 +119,7 @@ const getProfile = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: "Error while getting profile" })
+        res.status(401).json({ success: false, message: "Error while getting profile" })
     }
 }
 
@@ -128,13 +127,13 @@ const refreshAccessToken = async (req, res) => {
     try {
         const refreshToken = req.cookies.refreshToken
         if (!refreshToken) {
-            return res.json({ success: false, message: "token not found" })
+            return res.status(401).json({ success: false, message: "token not found" })
         }
         const verifiedToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
         const user = await adminModel.findById(verifiedToken._id)
 
         if (!user) {
-            return res.json({ success: false, message: "Invalid token" })
+            return res.status(401).json({ success: false, message: "Invalid token" })
         }
         const accessToken = jwt.sign(
             { _id: user._id },
@@ -143,7 +142,7 @@ const refreshAccessToken = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: false // need to write it because using localhost & its HTTP server not HTTPS 
+            secure: process.env.NODE_ENV === "production" // this will give true or false // need to write it because using localhost & its HTTP server not HTTPS 
         }
         return res.cookie("accessToken", accessToken, options)
             .json({
@@ -154,7 +153,7 @@ const refreshAccessToken = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: "Error while refreshing token" })
+        res.status(401).json({ success: false, message: "Error while refreshing token" })
     }
 }
 
