@@ -110,7 +110,7 @@ const listOrders = async (req, res) => {
         if(!verifiedToken){
             res.status(401).json({success: false, message: "token not verified"})
         }
-        const orders = await orderModel.find({}).sort({ createdAt: -1 });
+        const orders = await orderModel.find({ownerId: verifiedToken._id}).sort({ createdAt: -1 });
         res.json({ success: true, data: orders })
 
     } catch (error) {
@@ -133,7 +133,7 @@ const updateStatus = async (req, res) => {
 // for invoice to show to the user
 
 const getOrderDetails = async (req, res) => {
-    
+
     const { orderId } = req.body
     try {
 
