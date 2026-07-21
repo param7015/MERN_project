@@ -10,7 +10,7 @@ const Orders = ({ url, isAuthenticated }) => {
   const [orders, setorders] = useState([])
 
   const fetchOrders = async () => {
-    const response = await axios.get(url + "/api/order/listorders")
+    const response = await axios.get(url + "/api/order/listorders", {withCredentials: true})
     if (response.data.success) {
       setorders(response.data.data)
       console.log(response.data.data)

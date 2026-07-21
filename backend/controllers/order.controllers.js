@@ -12,6 +12,7 @@ const placeorder = async (req, res) => {
     try { // midleware attached userId will come from authMiddle
 
         const neworder = new orderModel({
+            ownerId: req.body.items[0].ownerId,
             userId: req.body.userId,
             items: req.body.items,
             amount: req.body.amount,
@@ -99,9 +100,19 @@ const userOrders = async (req, res) => {
 // for admin to see all the orders
 
 const listOrders = async (req, res) => {
+
     try {
+        const token = req.cookies.accessToken
+        if (!token) {
+            res.status(401).json({ success: false, message: "token not found" })
+        }
+        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET)
+        if(!verifiedToken){
+            res.status(401).json({success: false, message: "token not verified"})
+        }
         const orders = await orderModel.find({}).sort({ createdAt: -1 });
         res.json({ success: true, data: orders })
+
     } catch (error) {
         res.json({ success: false, message: "Failed to fetch orders" })
     }
@@ -122,6 +133,7 @@ const updateStatus = async (req, res) => {
 // for invoice to show to the user
 
 const getOrderDetails = async (req, res) => {
+    
     const { orderId } = req.body
     try {
 

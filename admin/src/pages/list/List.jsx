@@ -9,7 +9,7 @@ const List = ({ url, isAuthenticated }) => {
   const [list, setlist] = useState([])
 
   const fetchList = async () => {
-    const response = await axios.get(`${url}/api/food/list`)
+    const response = await axios.get(`${url}/api/food/list`, {withCredentials: true})
     if (response.data.success) {
       setlist(response.data.data)
     }

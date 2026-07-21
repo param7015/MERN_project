@@ -33,7 +33,7 @@ const Add = ({ url, isAuthenticated }) => {
         formdata.append('category', data.category);
         formdata.append('image', image);
 
-        const response = await axios.post(`${url}/api/food/add`, formdata);
+        const response = await axios.post(`${url}/api/food/add`, formdata, {withCredentials: true});
         if (response.data.success) {
             setdata({
                 name: "",

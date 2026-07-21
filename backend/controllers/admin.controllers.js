@@ -2,6 +2,7 @@ import adminModel from "../models/admin.models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator"
+import { foodModel } from "../models/food.models.js";
 
 
 const generateAccessandRefreshToken = async (adminId) => {
@@ -95,9 +96,9 @@ const adminRegister = async (req, res) => {
         }
 
         return res.json({
-                success: true,
-                message: "Account created. Please Login"
-            })
+            success: true,
+            message: "Account created. Please Login"
+        })
 
     } catch (error) {
         console.log(error);
@@ -136,7 +137,7 @@ const refreshAccessToken = async (req, res) => {
         }
         const accessToken = jwt.sign(
             { _id: user._id },
-                 process.env.JWT_SECRET,
+            process.env.JWT_SECRET,
             { expiresIn: "1d" })
 
         const options = {
@@ -184,9 +185,74 @@ const logout = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(401)
-           .json({ success: false, message: "Error while logging out" })
+            .json({ success: false, message: "Error while logging out" })
     }
 }
+
+
+
+
+
+
+
+// const addProduct = async (req, res) => {
+//     const token = req.cookies.accessToken
+//     if (!token) {
+//         return res.json({ success: false, message: "token not found" })
+//     }
+//     const verifiedToken = jwt.verify(token, process.env.JWT_SECRET)
+//     const user = await adminModel.findById(verifiedToken._id)
+//     if (!user) {
+//         return res.json({ success: false, message: "Invalid token" })
+//     }
+
+//     const { name, price, image } = req.body
+//     try {
+//         if (!name || !price || !image) {
+//             return res.json({ success: false, message: "All fields are required" })
+//         }
+//         const newProduct = new foodModel({
+//             ownerId: verifiedToken._id,
+//             name,
+//             price,
+//             image
+//         })
+//         await newProduct.save()
+//         return res.json({ success: true, message: "Product added successfully" })
+//     }
+//     catch (error) {
+//         console.log(error)
+//         res.json({ success: false, message: "Error while adding product" })
+//     }
+
+// }
+
+
+
+
+// const seeproducts = async (req, res) => {
+
+//     try {
+//         const token = req.cookies.accessToken
+//         if (!token) {
+//             return res.json({ success: false, message: "token not found" })
+//         }
+//         const verifiedToken = jwt.verify(token, process.env.JWT_SECRET)
+//         if (!verifiedToken) {
+//             res.json({ success: false, message: "Invalid token" })
+//         }
+
+//         const products = await productModel.find({ ownerId: verifiedToken._id })
+//         return res.json({ success: true, products })
+
+//     }
+//     catch (error) {
+//         console.log(error)
+//         res.json({ success: false, message: "Error while fetching products" })
+//     }
+
+// }
+
 
 
 
