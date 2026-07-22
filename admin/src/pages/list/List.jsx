@@ -21,6 +21,28 @@ const List = ({ url, isAuthenticated }) => {
     setloading(false)
   }
 
+
+  const [status, setstatus] = useState("Open")
+
+  const adminStatusHandler = async (event) => {
+    const value = event.target.value
+    setstatus(value)
+    
+    try {
+      const response = await axios.post(`${url}/api/food/adminStatus`, { isOpen: value === "Open" ? true : false }, { withCredentials: true })
+      if (response.data.success) {
+        toast.success(response.data.message)
+      } else {
+        toast.error(response.data.message)
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message)
+    }
+  }
+
+
+
+
   const removefood = async (id) => {
     const response = await axios.post(`${url}/api/food/remove`, { id })
     await fetchList()
@@ -45,7 +67,19 @@ const List = ({ url, isAuthenticated }) => {
       ) :
         isAuthenticated ? (
           <div className='list add flex-col' >
-            <p>All Food List</p>
+            <div className="top-bar-list">
+              <p>All Food List</p>
+
+              <div className="restaurant-status">
+                <h4>Restaurant Status:</h4>
+
+                <select onChange={adminStatusHandler} value={status} className='admin-status'>
+                  <option value="Open">Open</option>
+                  <option value="Closed">Closed</option>
+                </select>
+              </div>
+            </div>
+
             <div className="list-table">
               <div className="list-table-format title">
                 <b>Image</b>

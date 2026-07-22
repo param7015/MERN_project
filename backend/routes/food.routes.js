@@ -1,5 +1,5 @@
 import express from "express";
-import { addFood, listFood, deleteFood, chatController, limitFoodList, searchFood } from "../controllers/food.controllers.js";
+import { addFood, listFood, deleteFood, chatController, limitFoodList, searchFood, adminStatus } from "../controllers/food.controllers.js";
 import multer from "multer";
 
 
@@ -25,6 +25,7 @@ foodRouter.post("/remove", deleteFood)
 foodRouter.post("/chat", chatController)
 foodRouter.get("/limitFoodList", limitFoodList)
 foodRouter.get("/searchFood", searchFood)
+foodRouter.post("/adminStatus", adminStatus)
 
 
 export default foodRouter;

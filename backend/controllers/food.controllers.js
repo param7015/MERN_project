@@ -61,6 +61,8 @@ const listFood = async (req, res) => {
     }
 }
 
+
+
 const deleteFood = async (req, res) => {
     try {
         await foodModel.findByIdAndDelete(req.body.id)
@@ -71,6 +73,41 @@ const deleteFood = async (req, res) => {
         res.json({ success: false, message: "Error" })
     }
 }
+
+
+
+
+// restaurant status update
+const adminStatus = async (req, res) => {
+    try {
+        const token = req.cookies.accessToken
+        if (!token) {
+            return res.status(401).json({ success: false, message: "token not found" })
+        }
+        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET)
+        if (!verifiedToken) {
+            return res.status(401).json({ success: false, message: "Invalid token" })
+        }
+
+        await foodModel.updateMany(
+            {
+                ownerId: verifiedToken._id
+            },
+            {
+                $set: {
+                    isOpen: req.body.isOpen
+                }
+            }
+        );
+        return res.json({ success: true, message: "Status updated successfully" })
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ success: false, message: "Error" })
+    }
+
+}
+
 
 
 
@@ -218,4 +255,4 @@ User: ${message}
     }
 };
 
-export { addFood, listFood, deleteFood, limitFoodList, searchFood, chatController };
+export { addFood, listFood, deleteFood, limitFoodList, searchFood, chatController, adminStatus }

@@ -3,7 +3,7 @@ import { assets } from '../../assets/assets'
 import './fooditem.css'
 import { StoreContext } from '../Storecontext/Storecontext'
 
-const Fooditem = ({ id, name, price, image, description }) => {
+const Fooditem = ({ id, name, price, image, description, isOpen }) => {
 
   const { cartitems, addtocart, removefromcart, url } = useContext(StoreContext)
 
@@ -13,7 +13,7 @@ const Fooditem = ({ id, name, price, image, description }) => {
 
 
   return (
-    <div className='food-item'>
+    <div className={`food-item ${isOpen ? "" : "disabled"}`}>
       <img className='food-item-image' src={url + "/images/" + image} alt="" />
 
       <div className="food-item-info">
@@ -46,11 +46,11 @@ const Fooditem = ({ id, name, price, image, description }) => {
         {
           !cartitems?.[id]
             // ? <img className='add' onClick={() => addtocart(id)} src={assets.add_icon_white} alt="" />
-            ? <h5 className='add' onClick={() => addtocart(id)}> + Add to Cart</h5>
+            ? <h5 className='add' onClick={() => addtocart(id)}>{isOpen ? "Add to Cart +" : "Not Available"}</h5>
             : <div className='food-item-component'>
-              <img className='red-icon' onClick={() => removefromcart(id)} src={assets.remove_icon_red} alt='' />
+              <img className='red-icon' onClick={() => isOpen && removefromcart(id)} src={assets.remove_icon_red} alt='' />
               <p>{cartitems[id]}</p>
-              <img className='red-icon' onClick={() => addtocart(id)} src={assets.add_icon_green} alt='' />
+              <img className='red-icon' onClick={() => isOpen && addtocart(id)} src={assets.add_icon_green} alt='' />
             </div>
         }
       </div>

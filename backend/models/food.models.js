@@ -26,6 +26,10 @@ const foodSchema = new mongoose.Schema({
     category:{
         type: String,
         require: true
+    },
+    isOpen:{
+        type: Boolean,
+        default: true
     }
 }, {timestamps: true})
 

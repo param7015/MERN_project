@@ -43,7 +43,7 @@ const FoodDisplay = ({ category }) => {
         
         {fetchfoodlist.map((item, index) => {
             if (category === "All" || category === item.category) {
-              return <Fooditem key={index} id={item._id} name={item.name} price={item.price} image={item.image} description={item.description} category={item.category} />
+              return <Fooditem key={index} id={item._id} name={item.name} price={item.price} image={item.image} description={item.description} category={item.category} isOpen={item.isOpen} />
             }
           })
         }
