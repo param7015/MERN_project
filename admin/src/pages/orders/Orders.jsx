@@ -1,4 +1,3 @@
-import React from 'react'
 import './orders.css'
 import { useState } from 'react'
 import axios from 'axios'
@@ -11,16 +10,22 @@ const Orders = ({ url, isAuthenticated }) => {
   const [loading, setloading] = useState(false)
 
   const fetchOrders = async () => {
-    setloading(true)
-    const response = await axios.get(url + "/api/order/listorders", {withCredentials: true})
+  try {
+    setloading(true);
+
+    const response = await axios.get(url + "/api/order/listorders",{ withCredentials: true });
+
     if (response.data.success) {
-      setorders(response.data.data)
-      console.log(response.data.data)
+      setorders(response.data.data);
     } else {
-      toast.error(response.data.message)
+      toast.error(response.data.message);
     }
-    setloading(false)
+  } catch (error) {
+    toast.error(error.response?.data?.message || error.message);
+  } finally {
+    setloading(false);
   }
+};
 
   const statusHandler = async (event, orderId) => {
     const response = await axios.post(url + "/api/order/status", { orderId, status: event.target.value })

@@ -86,8 +86,8 @@ const verifyorder = async (req, res) => {
     }
 }
 
-// for the user to see his orders
 
+// for the user to see his orders
 const userOrders = async (req, res) => {
     try {
         const orders = await orderModel.find({ userId: req.body.userId }).sort({ createdAt: -1 })
@@ -97,8 +97,8 @@ const userOrders = async (req, res) => {
     }
 }
 
-// for admin to see all the orders
 
+// for admin to see all the orders
 const listOrders = async (req, res) => {
 
     try {
@@ -114,7 +114,7 @@ const listOrders = async (req, res) => {
         res.json({ success: true, data: orders })
 
     } catch (error) {
-        res.json({ success: false, message: "Failed to fetch orders" })
+        res.status(500).json({ success: false, message: "Failed to fetch orders" })
     }
 }
 

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const foodSchema = new mongoose.Schema({    
     ownerId: {
         type: mongoose.Schema.Types.ObjectId,

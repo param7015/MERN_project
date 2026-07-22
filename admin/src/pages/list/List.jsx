@@ -41,7 +41,6 @@ const List = ({ url, isAuthenticated }) => {
       {loading ? (
         <div className="list-loader">
           <div className="lds-facebook"><div></div><div></div><div></div></div>
-          <p>Fetching your items...</p>
         </div>
       ) :
         isAuthenticated ? (

@@ -168,20 +168,22 @@
 
 
 
+
 .lds-roller,
 .lds-roller div,
 .lds-roller div:after {
   box-sizing: border-box;
 }
 .lds-roller {
-  transform: scale(0.7);
+  transform: scale(0.6);
   color: green;
 }
+
 .lds-roller {
   display: inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
 }
 .lds-roller div {
   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
@@ -262,3 +264,13 @@
   }
 }
 
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-text{
+  font-weight: 400;
+}

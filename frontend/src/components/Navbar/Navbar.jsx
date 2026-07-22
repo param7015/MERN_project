@@ -13,6 +13,7 @@ const Navbar = ({ setshowlogin }) => {
     const navigate = useNavigate();
 
     const [sidebar, setsidebar] = useState(false)
+    const [loading, setloading] = useState(false)
 
     const handleLogout = () => {
         localStorage.removeItem("token")
@@ -23,10 +24,12 @@ const Navbar = ({ setshowlogin }) => {
     const [user, setuser] = useState({})
 
     useEffect(() => {
+        setloading(true)
         const getuser = async () => {
             const response = await axios.get(url + '/api/user/getuser', { headers: { token } })
             setuser(response.data.user)
             // console.log(response.data.user)
+            setloading(false)
         }
         getuser()
     }, [token])
@@ -55,29 +58,38 @@ const Navbar = ({ setshowlogin }) => {
                     <Link to='/cart'><img src={assets.basket_icon} alt="" /></Link>
                     <div className={gettotal() === 0 ? "" : "dot"} ></div>
                 </div>
+
                 <div className="sign-in">
                     <div className="navbar-profile">
-                        {!token ? (<button onClick={() => setshowlogin(prev => !prev)}>Sign In</button>) 
-                        // im doing (prev => !prev) because i havent passed showlogin as props
-                        : (
-                        <div>
-                            <div onClick={() => setsidebar(prev => !prev)}>
-                                {user? <h1 className='profile-initial'>{user?.name?.charAt(0)?.toUpperCase()}</h1>
-                                : <img src={assets.profile_icon} alt="" srcset="" />}
-                            </div>
 
-                            {sidebar && (
-                                <div className="navbar-profile-dropdown">
-                                    <h2 className='profile-initial' >{user?.name?.charAt(0)?.toUpperCase()}</h2>
-                                    <p className='username'>{user?.name}</p>
-                                    <p className='useremail'>{user?.email}</p>
-                                    <li className='listyle' onClick={() => navigate('/myorders')} ><img src={assets.bag_icon} alt="" />My orders</li>
-                                    <hr />
-                                    <li className='listyle' onClick={handleLogout}><img src={assets.logout_icon} alt="" />Logout</li>
+                        {loading ? (
+                            <div className='loader-top'>
+                                <div class="lds-dual-ring">
+                                    <img src={assets.profile_icon} alt="" srcset="" />
                                 </div>
-                            )}
-                        </div>
-                        )}
+                                <p>Getting profile...</p>
+                            </div>
+                        ) : (
+                            !token ? (<button onClick={() => setshowlogin(prev => !prev)}>Sign In</button>)
+                                // im doing (prev => !prev) because i havent passed showlogin as props
+                                : (
+                                    <div>
+                                        <div onClick={() => setsidebar(prev => !prev)}>
+                                            {user && (<h1 className='profile-initial'>{user?.name?.charAt(0)?.toUpperCase()}</h1>)}
+                                        </div>
+
+                                        {sidebar && (
+                                            <div className="navbar-profile-dropdown">
+                                                <h2 className='profile-initial' >{user?.name?.charAt(0)?.toUpperCase()}</h2>
+                                                <p className='username'>{user?.name}</p>
+                                                <p className='useremail'>{user?.email}</p>
+                                                <li className='listyle' onClick={() => navigate('/myorders')} ><img src={assets.bag_icon} alt="" />My orders</li>
+                                                <hr />
+                                                <li className='listyle' onClick={handleLogout}><img src={assets.logout_icon} alt="" />Logout</li>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
 
                     </div>
 
@@ -85,7 +97,7 @@ const Navbar = ({ setshowlogin }) => {
 
 
             </div>
-            
+
 
         </div >
     )

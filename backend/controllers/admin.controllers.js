@@ -24,6 +24,7 @@ const generateAccessandRefreshToken = async (adminId) => {
     }
 }
 
+
 const adminLogin = async (req, res) => {
 
     const { email, password } = req.body;

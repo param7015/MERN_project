@@ -75,7 +75,6 @@ const deleteFood = async (req, res) => {
 
 
 
-
 // for user to get limited food list to show in the front end
 const limitFoodList = async (req, res) => {
 

@@ -33,6 +33,7 @@ adminSchema.methods.generateAccessToken = function () {
         }
     )
 }
+
 adminSchema.methods.generateRefreshToken = function(){
     return jwt.sign(
         {

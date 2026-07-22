@@ -46,13 +46,12 @@
     border: none;
 }
 
-.not-sign-in{
+.not-sign-in {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
-    margin-left: 420px;
+    margin-left: 20%;
     color: red;
-    font-size: 40px;
+    font-size: 35px;
     font-weight: 600;
 }

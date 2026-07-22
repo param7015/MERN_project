@@ -93,19 +93,23 @@ const Navbar = ({ setisAuthenticated, isAuthenticated, url, setshowlogin }) => {
       <div className="navbar">
         <img className='logo' src={assets.logo} alt="" />
 
+
         {loading ? (
-          <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          <div className='profile-container'>
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            <h3 className='profile-text'>Getting profile...</h3>
+          </div>
         ) : (
-            !isAuthenticated ? (
-              <div>
-                <p onClick={() => { setshowlogin(prev => !prev) }} className='sign-in-btn'>Sign In</p>
-              </div>
-            ) : (
-              <div className='profile-container'>
-                <p onClick={() => { setsidebarprofile(prev => !prev) }}>{user?.name?.charAt(0).toUpperCase()}</p>
-              </div>
-            )
-          )}
+          !isAuthenticated ? (
+            <div>
+              <p onClick={() => { setshowlogin(prev => !prev) }} className='sign-in-btn'>Sign In</p>
+            </div>
+          ) : (
+            <div className='profile-container'>
+              <p onClick={() => { setsidebarprofile(prev => !prev) }}>{user?.name?.charAt(0).toUpperCase()}</p>
+            </div>
+          )
+        )}
 
         {sidebarprofile ? (
           <div className='sidebarprofile'>
