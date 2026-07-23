@@ -41,14 +41,23 @@ const adminLogin = async (req, res) => {
         }
 
         const { accessToken, refreshToken } = await generateAccessandRefreshToken(admin._id);
-        const options = {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // this will give true or false
-            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-        }
 
-        return res.cookie("accessToken", accessToken, options)
-            .cookie("refreshToken", refreshToken, options)
+        const accessOptions = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            maxAge: 24 * 60 * 60 * 1000, // 1 day  this maxage is for the browser to store
+        };
+
+        const refreshOptions = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        };
+
+        return res.cookie("accessToken", accessToken, accessOptions)
+            .cookie("refreshToken", refreshToken, refreshOptions)
             .json({
                 success: true,
                 message: "Admin user logged in successfully",
@@ -138,12 +147,15 @@ const refreshAccessToken = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "1d" })
 
-        const options = {
+            
+        const accessOptions = {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // this will give true or false // need to write it because using localhost & its HTTP server not HTTPS 
+            secure: process.env.NODE_ENV === "production", // this will give true or false // need to write it because using localhost & its HTTP server not HTTPS
             sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-        }
-        return res.cookie("accessToken", accessToken, options)
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
+        };
+
+        return res.cookie("accessToken", accessToken, accessOptions)
             .json({
                 success: true,
                 message: "Admin user refreshed successfully"
