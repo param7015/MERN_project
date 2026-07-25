@@ -151,14 +151,13 @@
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
-    background-color: rgb(50, 185, 57);
+    width: 9px;
+    height: 9px;
+    background-color: rgb(0 255 13);
     position: absolute;
     top: -5px;
     right: -8px;
     border-radius: 50%;
-    border: 1px solid white;
 }
 
 .button {

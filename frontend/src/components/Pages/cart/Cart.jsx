@@ -7,14 +7,12 @@ import axios from 'axios';
 
 
 const Cart = () => {
-  const { cartitems, food_list, addtocart, removefromcart, gettotal, token, url } = useContext(StoreContext)
+  const { getCartItems, cartitems, cartData, cartLoading, addtocart, removefromcart, getTotal, token, url } = useContext(StoreContext)
+
   const navigate = useNavigate()
   const [err, setErr] = useState("");
   const { scrollToTop } = useCustomhook()
   const [loading, setLoading] = useState(false);
-  const [cartLoading, setcartLoading] = useState(false);
-
-  const [cartData, setCartData] = useState([])
 
   const [formData, setdata] = useState({
     user: "",
@@ -34,46 +32,7 @@ const Cart = () => {
   }
 
 
-  // it will get the items from the server
-  const getCartItems = async () => {
 
-    try {
-      setcartLoading(true);
-      const foodIds = Object.keys(cartitems);
-
-      if (foodIds.length === 0) {
-        setCartData([]);
-        return;
-      }
-
-      const response = await axios.post(url + "/api/cart/getCartItems", { foodIds });
-      const foods = response.data.foods;
-      const items = foods.map((food) => ({
-        ...food,
-        quantity: cartitems[food._id],
-      }));
-      console.log(items);
-
-      setCartData(items);
-
-    } catch (error) {
-      console.log(error);
-      
-    } finally {
-      setcartLoading(false);
-    }
-  }
-
-  // it will get the total amount of the items in the cart
-  const getTotal = () => {
-    let total = 0;
-
-    cartData.forEach(item => {
-      total += item.price * item.quantity;
-    });
-
-    return total;
-  }
 
   useEffect(() => {
     scrollToTop();

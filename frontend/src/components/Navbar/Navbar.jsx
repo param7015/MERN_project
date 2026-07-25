@@ -9,7 +9,7 @@ import axios from 'axios'
 const Navbar = ({ setshowlogin }) => {
 
 
-    const { gettotal, input, setinput, token, settoken, url, admin_url } = useContext(StoreContext)
+    const { cartitems, token, settoken, url, admin_url } = useContext(StoreContext)
     const navigate = useNavigate();
 
     const [sidebar, setsidebar] = useState(false)
@@ -56,7 +56,7 @@ const Navbar = ({ setshowlogin }) => {
 
                 <div className="navbar-cart-container">
                     <Link to='/cart'><img src={assets.basket_icon} alt="" /></Link>
-                    <div className={gettotal() === 0 ? "" : "dot"} ></div>
+                    <div className={Object.values(cartitems).some((quantity) => quantity > 0) ? "dot" : ""} ></div>
                 </div>
 
                 <div className="sign-in">

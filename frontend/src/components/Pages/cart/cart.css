@@ -13,7 +13,8 @@
     max-width: 1300px;
 }
 
-.cart-left p, .order-summary-card p{
+.cart-left p,
+.order-summary-card p {
     font-family: 'Outfit', sans-serif;
     font-size: 15px;
     text-transform: uppercase;
@@ -190,8 +191,13 @@
 }
 
 @keyframes total-spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* --- Delivery Info --- */
@@ -208,7 +214,9 @@
     margin-bottom: 5px;
 }
 
-.form-group input, .form-row input, .address-textarea {
+.form-group input,
+.form-row input,
+.address-textarea {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid var(--border-color);
@@ -226,7 +234,9 @@
     gap: 10px;
 }
 
-.form-group input:focus, .form-row input:focus, .address-textarea:focus {
+.form-group input:focus,
+.form-row input:focus,
+.address-textarea:focus {
     border-color: tomato;
     box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
 }
@@ -267,7 +277,7 @@
     gap: 10px;
 }
 
-.cart-empty button{
+.cart-empty button {
     background-color: tomato;
     border: none;
     padding: 15px 30px;
@@ -306,9 +316,11 @@
     .cart-content {
         grid-template-columns: 1fr;
     }
+
     .cart-container {
         padding: 30px 20px;
     }
+
     .order-summary-card {
         position: static;
     }
@@ -354,7 +366,9 @@
         padding: 24px 20px;
     }
 
-    .form-group input, .form-row input, .address-textarea {
+    .form-group input,
+    .form-row input,
+    .address-textarea {
         box-sizing: border-box;
     }
 
@@ -380,20 +394,23 @@
 }
 
 .Toastify__progress-bar {
-  background: #000000;
-  height: 6px;
-  border-radius: 3px;
+    background: #000000;
+    height: 6px;
+    border-radius: 3px;
 }
-.theme{
+
+.theme {
     background-color: blue;
 }
-.userdetails{
+
+.userdetails {
     font-size: 15px;
     text-align: center;
     color: #ff2f00;
     margin-top: 5px;
 }
-.loading-container p{
+
+.loading-container p {
     margin: 15px 0 5px 0;
     text-align: center;
     color: #0361e5;
