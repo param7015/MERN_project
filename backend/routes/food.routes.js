@@ -10,7 +10,7 @@ const foodRouter = express.Router();
 const storage = multer.diskStorage({
     destination: "uploads",
     filename: (req, file, cb) => {
-        return cb(null, `${Date.now()}${file.originalname}`)
+        cb(null, `${Date.now()}-${file.originalname}`); // date method is only for the different filename and avoid duplicate data
     }
 })
 

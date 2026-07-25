@@ -1,5 +1,6 @@
 import { foodModel } from "../models/food.models.js";
 import fs from "fs";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import jwt from "jsonwebtoken"
 
@@ -7,36 +8,48 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 
 // its for admin to add its food items
+
 const addFood = async (req, res) => {
 
-    let image_filename = `${req.file.filename}`
-
-    const token = req.cookies.accessToken
-    if (!token) {
-        return res.status(401).json({ success: false, message: "token not found" })
-    }
-    const verifiedToken = jwt.verify(token, process.env.JWT_SECRET)
-
-    if (!verifiedToken) {
-        return res.status(401).json({ success: false, message: "Invalid token" })
-    }
-
-    const food = new foodModel({
-        ownerId: verifiedToken._id,
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        image: image_filename,
-        category: req.body.category
-    })
     try {
-        await food.save();
-        res.json({ success: true, message: "Food added successfully" })
+        const token = req.cookies.accessToken
+        if (!token) {
+            return res.status(401).json({ success: false, message: "token not found" })
+        }
+        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET)
+
+        if (!verifiedToken) {
+            return res.status(401).json({ success: false, message: "Invalid token" })
+        }
+
+        // console.log(req.file)
+
+        const imagepath = req.file.path
+        if(!imagepath){
+            return res.status(400).json({success:false,message:"Image not found"})
+        }
+
+        const image = await uploadOnCloudinary(imagepath)
+        if(!image){
+            return res.status(400).json({success:false,message:"Failed to upload image on cloudinary"})
+        }
+
+        const food = new foodModel({
+            ownerId: verifiedToken._id,
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            image: image.url,
+            category: req.body.category
+        })
+
+        await food.save()
+        return res.json({ success: true, message: "Food added successfully" })
+
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: "Error" })
+        return res.json({ success: false, message: "Error" })
     }
-
 }
 
 // all food list

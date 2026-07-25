@@ -1,4 +1,5 @@
 import userModel from "../models/user.model.js"
+import {foodModel} from "../models/food.models.js"
 
 const addToCart = async(req, res) => {
     try {
@@ -50,5 +51,19 @@ const getCart = async(req, res) => {
 }   
 
 
+const getCartItems = async(req, res) => {
+    try {
+        const {foodIds} = req.body;
+        
+        const foods = await foodModel.find({_id: {$in: foodIds}})
+        
+        res.json({success: true, foods});
 
-export {addToCart, removeFromCart, getCart}   
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: "Error while getting the items"})
+    }
+}
+
+
+export {addToCart, removeFromCart, getCart, getCartItems}   

@@ -460,9 +460,9 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 6.4px solid currentColor;
-  border-color: rgb(65, 255, 198) transparent rgb(65, 255, 198) transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
+  border: 4px solid currentColor;
+  border-color: #05f405 #05f405 #05f405 transparent;
+  animation: lds-dual-ring 1s ease-in-out infinite;
 }
 
 .lds-dual-ring img {
@@ -489,5 +489,5 @@
 
 .loader-top p {
     font-size: 14px;
-    color: var(--text-secondary, #555);
+    color: tomato;
 }

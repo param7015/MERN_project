@@ -14,7 +14,7 @@ const Fooditem = ({ id, name, price, image, description, isOpen }) => {
 
   return (
     <div className={`food-item ${isOpen ? "" : "disabled"}`}>
-      <img className='food-item-image' src={url + "/images/" + image} alt="" />
+      <img className='food-item-image' src={image} alt="" />
 
       <div className="food-item-info">
         <p className='food-name'>{name}</p>

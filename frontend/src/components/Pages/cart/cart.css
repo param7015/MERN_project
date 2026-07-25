@@ -13,13 +13,6 @@
     max-width: 1300px;
 }
 
-/* .section-title {
-    font-size: 26px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 25px;
-} */
-
 .cart-left p, .order-summary-card p{
     font-family: 'Outfit', sans-serif;
     font-size: 15px;
@@ -32,6 +25,7 @@
     align-items: center;
     gap: 8px;
 }
+
 /* --- Left Column: Items --- */
 .cart-items-list {
     display: flex;
@@ -122,7 +116,6 @@
 
 .qty-btn:hover {
     color: tomato;
-    
 }
 
 .qty-count {
@@ -167,6 +160,7 @@
 .summary-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: var(--text-secondary);
     font-size: 16px;
 }
@@ -183,6 +177,21 @@
     height: 1px;
     background: var(--border-color);
     margin: 5px 0;
+}
+
+.total-spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 76, 36, 0.2);
+    border-top: 3px solid #ff4c24;
+    border-radius: 50%;
+    animation: total-spin 0.7s linear infinite;
+    display: inline-block;
+}
+
+@keyframes total-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* --- Delivery Info --- */
@@ -371,14 +380,13 @@
 }
 
 .Toastify__progress-bar {
-  background: #000000; /* pink color */
-  height: 6px;          /* thicker bar */
-  border-radius: 3px;   /* rounded ends */
+  background: #000000;
+  height: 6px;
+  border-radius: 3px;
 }
 .theme{
     background-color: blue;
 }
-/* Optional: remove the progress bar entirely */
 .userdetails{
     font-size: 15px;
     text-align: center;

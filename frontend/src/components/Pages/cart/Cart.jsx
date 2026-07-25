@@ -12,6 +12,10 @@ const Cart = () => {
   const [err, setErr] = useState("");
   const { scrollToTop } = useCustomhook()
   const [loading, setLoading] = useState(false);
+  const [cartLoading, setcartLoading] = useState(false);
+
+  const [cartData, setCartData] = useState([])
+
   const [formData, setdata] = useState({
     user: "",
     email: "",
@@ -29,31 +33,65 @@ const Cart = () => {
     }))
   }
 
+
+  // it will get the items from the server
+  const getCartItems = async () => {
+
+    try {
+      setcartLoading(true);
+      const foodIds = Object.keys(cartitems);
+
+      if (foodIds.length === 0) {
+        setCartData([]);
+        return;
+      }
+
+      const response = await axios.post(url + "/api/cart/getCartItems", { foodIds });
+      const foods = response.data.foods;
+      const items = foods.map((food) => ({
+        ...food,
+        quantity: cartitems[food._id],
+      }));
+      console.log(items);
+
+      setCartData(items);
+
+    } catch (error) {
+      console.log(error);
+      
+    } finally {
+      setcartLoading(false);
+    }
+  }
+
+  // it will get the total amount of the items in the cart
+  const getTotal = () => {
+    let total = 0;
+
+    cartData.forEach(item => {
+      total += item.price * item.quantity;
+    });
+
+    return total;
+  }
+
   useEffect(() => {
     scrollToTop();
-  }, []);
+    getCartItems();
+  }, [cartitems]);
 
 
 
 
-
+  // this is for placing the order
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    let orderitems = []
-    food_list.map((item) => {
-      if (cartitems[item._id] > 0) {
-        let iteminfo = item;
-        iteminfo["quantity"] = cartitems[item._id];
-        orderitems.push(iteminfo);
-      }
-    })
-
     let orderdata = {
       address: formData,
-      items: orderitems,
-      amount: gettotal(),
+      items: cartData,
+      amount: getTotal(),
     }
 
     const response = await axios.post(url + "/api/order/placeorder", orderdata, { headers: { token } })
@@ -72,7 +110,7 @@ const Cart = () => {
 
   return (
     <div className='cart-container'>
-      {gettotal() === 0 ? (
+      {getTotal() === 0 && !cartLoading ? (
         <div className='cart-empty'>
           <img src="https://cdni.iconscout.com/illustration/free/thumb/free-empty-cart-illustration-svg-download-png-3385483.png" alt="Empty Cart" className='empty-cart-img' />
           <h1>Your cart is empty</h1>
@@ -82,13 +120,13 @@ const Cart = () => {
       ) : (
         <div className='cart-content'>
           <div className="cart-left">
-            <p >Shopping Bag</p>
+            <p>Shopping Bag</p>
             <div className="cart-items-list">
-              {food_list.map((item, index) => {
+              {cartData.map((item, index) => {
                 if (cartitems[item._id] > 0) {
                   return (
                     <div key={item._id} className="cart-item-card">
-                      <img src={url + "/images/" + item.image} alt={item.name} className='item-image' />
+                      <img src={item.image} alt={item.name} className='item-image' />
                       <div className="item-details">
                         <div className="item-info">
                           <p className='item-name'>{item.name}</p>
@@ -118,16 +156,22 @@ const Cart = () => {
               <div className="summary-details">
                 <div className="summary-row">
                   <span>Subtotal</span>
-                  <span>${gettotal()}</span>
+                  <span>${getTotal()}</span>
                 </div>
                 <div className="summary-row">
                   <span>Delivery Fee</span>
                   <span>$4</span>
                 </div>
+
                 <hr className='summary-divider' />
+
                 <div className="summary-row total">
                   <span>Total</span>
-                  <span>${gettotal() + 4}</span>
+                  {cartLoading ? ( // spinner for updated payment
+                    <div className="total-spinner"></div>
+                  ) : (
+                    <span>${getTotal() + 4}</span>
+                  )}
                 </div>
               </div>
 
@@ -169,6 +213,7 @@ const Cart = () => {
 
         </div>
       )}
+
     </div>
   )
 }
