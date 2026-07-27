@@ -1,7 +1,7 @@
 .add {
     width: 70%;
     margin-left: max(5vw, 25px);
-    margin-top: 50px;
+    margin-top: 35px;
     color: rgb(84, 84, 84);
     font-size: 20px;
 }
@@ -44,6 +44,11 @@
     color: white;
     cursor: pointer;
     border: none;
+}
+
+.add-btn:active{
+    background-color: rgb(243, 155, 142);
+    transform: translateY(2px);
 }
 
 .not-sign-in {

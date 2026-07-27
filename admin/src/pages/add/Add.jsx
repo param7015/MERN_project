@@ -8,6 +8,7 @@ const Add = ({ url, isAuthenticated }) => {
 
 
     const [image, setimage] = useState(false)
+    const [isloading, setisloading] = useState(false)
 
     const [data, setdata] = useState({
         name: "",
@@ -24,6 +25,8 @@ const Add = ({ url, isAuthenticated }) => {
     }
 
     const onSubmitHandler = async (event) => {
+
+        setisloading(true);
         event.preventDefault();
 
         const formdata = new FormData();
@@ -46,6 +49,8 @@ const Add = ({ url, isAuthenticated }) => {
         } else {
             toast.error(response.data.error)
         }
+
+        setisloading(false);
 
     }
 
@@ -92,7 +97,7 @@ const Add = ({ url, isAuthenticated }) => {
                                 <input onChange={onHandleChange} type="number" name="price" value={data.price} placeholder='$20' />
                             </div>
                         </div>
-                        <button type="submit" className='add-btn'>ADD</button>
+                        <button type="submit" disabled={isloading} className='add-btn'>{isloading ? "Adding..." : "ADD"}</button>
                     </form>
 
                 </div>
