@@ -12,18 +12,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const addFood = async (req, res) => {
 
     try {
-        const token = req.cookies.accessToken
-        if (!token) {
-            return res.status(401).json({ success: false, message: "token not found" })
-        }
-        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET)
-
-        if (!verifiedToken) {
-            return res.status(401).json({ success: false, message: "Invalid token" })
-        }
-
         // console.log(req.file)
-
         const imagepath = req.file.path
         if(!imagepath){
             return res.status(400).json({success:false,message:"Image not found"})
@@ -35,7 +24,7 @@ const addFood = async (req, res) => {
         }
 
         const food = new foodModel({
-            ownerId: verifiedToken._id,
+            ownerId: req.user._id,   // middleware attached for admin
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
@@ -56,21 +45,12 @@ const addFood = async (req, res) => {
 const listFood = async (req, res) => {
     try {
 
-        const token = req.cookies.accessToken
-        if (!token) {
-            return res.json({ success: false, message: "token not found" })
-        }
-        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET)
-        if (!verifiedToken) {
-            res.json({ success: false, message: "Invalid token" })
-        }
-
-        const foods = await foodModel.find({ ownerId: verifiedToken._id });
-        res.json({ success: true, data: foods })
+        const foods = await foodModel.find({ ownerId: req.user._id });
+        res.status(200).json({ success: true, data: foods })
 
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: "Error" })
+        res.status(500).json({ success: false, message: "Error" })
     }
 }
 
@@ -93,18 +73,10 @@ const deleteFood = async (req, res) => {
 // restaurant status update
 const adminStatus = async (req, res) => {
     try {
-        const token = req.cookies.accessToken
-        if (!token) {
-            return res.status(401).json({ success: false, message: "token not found" })
-        }
-        const verifiedToken = jwt.verify(token, process.env.JWT_SECRET)
-        if (!verifiedToken) {
-            return res.status(401).json({ success: false, message: "Invalid token" })
-        }
 
         await foodModel.updateMany(
             {
-                ownerId: verifiedToken._id
+                ownerId: req.user._id
             },
             {
                 $set: {

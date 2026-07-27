@@ -1,5 +1,6 @@
 import express from "express";
 import { addFood, listFood, deleteFood, chatController, limitFoodList, searchFood, adminStatus } from "../controllers/food.controllers.js";
+import verifyAdminToken from "../middleware/adminAuth.middleware.js";
 import multer from "multer";
 
 
@@ -19,13 +20,13 @@ const upload = multer({storage})
 
 
 // routes
-foodRouter.post("/add",upload.single("image"), addFood)
-foodRouter.get("/list", listFood)
+foodRouter.post("/add",verifyAdminToken, upload.single("image"), addFood)
+foodRouter.get("/list", verifyAdminToken, listFood)
 foodRouter.post("/remove", deleteFood)
 foodRouter.post("/chat", chatController)
 foodRouter.get("/limitFoodList", limitFoodList)
 foodRouter.get("/searchFood", searchFood)
-foodRouter.post("/adminStatus", adminStatus)
+foodRouter.post("/adminStatus", verifyAdminToken, adminStatus)
 
 
 export default foodRouter;
