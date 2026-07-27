@@ -35,7 +35,7 @@ const Cart = () => {
 
 
   useEffect(() => {
-    scrollToTop();
+    // scrollToTop();
     getCartItems();
   }, [cartitems]);
 
@@ -162,7 +162,11 @@ const Cart = () => {
                   {loading ? <p >Please wait...</p> : null}
                   <p className='userdetails' >{err}</p>
                 </div>
-                <button type='submit' className='checkout-btn' >PROCEED TO CHECKOUT</button>
+
+                <button type='submit' disabled={cartLoading} className='checkout-btn-cart' >
+                  {cartLoading ? <div className="total-spinner-pay"></div> : `PAY $${getTotal() + 4}`}
+                </button>
+
               </form>
 
 
