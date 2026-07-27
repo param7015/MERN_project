@@ -71,7 +71,7 @@ const SearchPage = () => {
           <div className="search-item" key={item._id}>
             <img
               className='search-item-image'
-              src={`${url}/images/${item.image}`}
+              src={item.image}
               alt={item.name}
             />
 

@@ -108,7 +108,7 @@ const Aichat = () => {
                     <div className="ai-food-cards">
                       {msg.foodItems.map((food, idx) => (
                         <div key={idx} className="ai-food-card">
-                          <img src={`${url}/images/${food.image}`} alt={food.name} />
+                          <img src={food.image} alt={food.name} />
                           <div className="ai-food-info">
                             <h5>{food.name}</h5>
                             <p>${food.price}</p>

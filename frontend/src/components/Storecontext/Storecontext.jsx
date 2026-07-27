@@ -6,11 +6,14 @@ export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
     const url = "https://mern-project-backend-tcyh.onrender.com"
+    // const url = "http://localhost:5000"
     const admin_url = "https://mern-project-admin-y0zm.onrender.com"
 
     const [cartitems, setcartitems] = useState({})
     const [token, settoken] = useState("")
     const [food_list, setfood_list] = useState([])
+    const [cartData, setcartData] = useState([])
+    const [cartLoading, setcartLoading] = useState(false)
 
 
     // adding items to cart itemid as key and again click its value
@@ -48,7 +51,7 @@ const StoreContextProvider = (props) => {
         }
     }
 
-    
+
 
     // removing the items from the cart
     const removefromcart = async (itemid) => {
@@ -59,19 +62,46 @@ const StoreContextProvider = (props) => {
     }
 
 
-    // getting the total amount of the items in the cart
-    const gettotal = () => {
-        let total = 0;
-        for (const item in cartitems) {
-            if (cartitems[item] > 0) {
-                let iteminfo = food_list.find((product) => product._id === item)
-                total += iteminfo.price * cartitems[item]
-            }
+    // its for the getting the cart items
+    const getCartItems = async () => {
+
+        try {
+            setcartLoading(true)
+            const foodIds = Object.keys(cartitems)
+
+            const response = await axios.post(url + "/api/cart/getCartItems", { foodIds })
+            const foods = response.data.foods
+
+            const items = foods.map(food => ({
+                ...food,
+                quantity: cartitems[food._id]
+            }))
+            setcartData(items)
+            // console.log(items)
+        } catch (error) {
+            console.log(error)
         }
+        finally {
+            setcartLoading(false)
+        }
+    }
+
+
+    // getting the total amount of the items in the cart
+    const getTotal = () => {
+
+        let total = 0;
+        cartData.forEach(item => {
+            total += item.price * item.quantity
+        })
         return total;
     }
 
+
+
     const [input, setinput] = useState("")
+
+
 
     const fetchfoodlist = async () => {
         const response = await axios.get(url + "/api/food/list")
@@ -107,13 +137,16 @@ const StoreContextProvider = (props) => {
         setcartitems,
         addtocart,
         removefromcart,
-        gettotal,
+        getTotal,
         input,
         setinput,
         url,
         token,
         settoken,
-        admin_url
+        admin_url,
+        getCartItems,
+        cartData,
+        cartLoading
     }
 
 
