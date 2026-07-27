@@ -5,8 +5,9 @@ import { toast } from "react-toastify";
 export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
-    const url = "https://mern-project-backend-tcyh.onrender.com"
+
     // const url = "http://localhost:5000"
+    const url = "https://mern-project-backend-tcyh.onrender.com"
     const admin_url = "https://mern-project-admin-y0zm.onrender.com"
 
     const [cartitems, setcartitems] = useState({})
@@ -103,10 +104,10 @@ const StoreContextProvider = (props) => {
 
 
 
-    const fetchfoodlist = async () => {
-        const response = await axios.get(url + "/api/food/list")
-        setfood_list(response.data.data)
-    }
+    // const fetchfoodlist = async () => {
+    //     const response = await axios.get(url + "/api/food/list")
+    //     setfood_list(response.data.data)
+    // }
 
     const loadCartData = async (token) => {
         if (token) {
@@ -117,7 +118,7 @@ const StoreContextProvider = (props) => {
 
     useEffect(() => {
         async function loadData() {
-            await fetchfoodlist()
+            // await fetchfoodlist()
             if (localStorage.getItem("token")) {
                 settoken(localStorage.getItem("token"))
                 // await loadCartData(localStorage.getItem("token"))

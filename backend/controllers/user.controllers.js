@@ -67,15 +67,15 @@ const getCurrentUser = async (req, res) => {
     try {
         const token = req.header("token")
         if (!token) {
-            return res.json({ success: false, message: "Token not found" })
+            return res.status(401).json({ success: false, message: "Token not found" })
         }
         const { id } = jwt.verify(token, process.env.JWT_SECRET);
         const user = await userModel.findById(id).select("-password");
-        res.json({ success: true, user })
+        res.status(200).json({ success: true, user })
 
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: "Error while getting the user" })
+        res.status(500).json({ success: false, message: "Error while getting the user" })
     }
 }
 

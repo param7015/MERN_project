@@ -25,12 +25,24 @@ const Navbar = ({ setshowlogin }) => {
 
     useEffect(() => {
         setloading(true)
-        const getuser = async () => {
-            const response = await axios.get(url + '/api/user/getuser', { headers: { token } })
-            setuser(response.data.user)
-            // console.log(response.data.user)
-            setloading(false)
+        if(!token){
+            return
         }
+        const getuser = async () => {
+
+            try {
+                setloading(true)
+                const response = await axios.get(url + '/api/user/getuser',{ headers: { token }})
+
+                setuser(response.data.user)
+
+            } catch (error) {
+                console.log(error.response?.data || error.message)
+            } finally {
+                setloading(false)
+            }
+        }
+
         getuser()
     }, [token])
 
